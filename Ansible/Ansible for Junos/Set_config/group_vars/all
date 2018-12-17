@@ -1,0 +1,7 @@
+server: 8.8.8.8
+ntpserver: 27.27.27.27   # please modify it properly
+
+credentials:
+  host: "{{ junos_host }}"
+  username: juniper
+  password: juniper

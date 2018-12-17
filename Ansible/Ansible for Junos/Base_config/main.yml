@@ -1,0 +1,23 @@
+- name: apply ntp config
+  hosts: MX-series
+
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+
+
+  tasks:
+
+
+# http://junos-ansible-modules.readthedocs.io/en/1.3.1/junos_cli.html
+# Execute CLI on device and save the output locally on a file
+
+      - name: junos cli
+        junos_cli:
+         host={{ junos_host }}
+         user={{ juniper_user }}
+         passwd={{ juniper_passwd }}
+         cli="show configuration | display set | no-more"
+         dest="{{playbook_dir}}/Config_Saved/{{ inventory_hostname }}.txt"
