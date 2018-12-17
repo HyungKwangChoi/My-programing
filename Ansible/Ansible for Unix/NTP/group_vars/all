@@ -1,0 +1,3 @@
+dnsserver: 8.8.8.8
+ntpserver: 27.124.125.251  # modify ip address properly
+

@@ -1,0 +1,6 @@
+- name: restart ntp service
+  service: name=ntpd state=started
+
+- name: register chkconfig on
+  command: /sbin/chkconfig ntpd on
+

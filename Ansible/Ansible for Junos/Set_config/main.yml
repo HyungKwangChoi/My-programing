@@ -1,0 +1,36 @@
+- name: apply ntp config
+  hosts: MX-series
+
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+
+  tasks:
+
+      - name: pass set and delete commands
+        junos_config:         
+          provider: "{{ credentials }}"
+          lines:
+           - delete interfaces
+           - delete routing-options
+           - delete chassis  
+           - delete system
+           - set groups re0 interfaces fxp0 unit 0 family inet address {{ junos_host }}/24 
+           - set groups re0 routing-options static route 172.0.0.0/8 next-hop 172.27.27.1  				  # please modify it properly
+           - set apply-groups re0
+           - set system host-name {{ inventory_hostname }}
+           - set system root-authentication encrypted-password "sdfsdfsdfsd"											  #please modify it properly
+           - set system login user juniper uid 2000 																						  	#please modify it properly
+           - set system login user juniper class super-user 																				#please modify it properly
+           - set system login user juniper authentication encrypted-password "dfsdgsdgdsgsdgsdgds"  #please modify it properly
+           - set system services ssh
+           - set system services telnet
+           - set system services netconf ssh
+           - set system services ftp
+           - set system syslog user * any emergency
+           - set system syslog file messages any notice
+           - set system syslog file messages authorization info
+           - set system syslog file interactive-commands interactive-commands any
+           - set system ntp server 172.27.27.27  #please modify it properly

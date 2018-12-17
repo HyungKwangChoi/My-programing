@@ -1,0 +1,8 @@
+[Test-lab]
+
+172.27.27.26  # add ip properly
+X.X.X.X
+
+[My-Server]
+172.27.27.27 # add ip properly
+X.X.X.X
