@@ -1,4 +1,3 @@
-import sys
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtCore import QDateTime
 import sys
