@@ -57,7 +57,8 @@ class Form(QtWidgets.QMainWindow):
        
     def __init__(self, parent=None):
         QtWidgets.QDialog.__init__(self,parent)
-        self.ui = uic.loadUi('./Window.ui', self) #If the script is not working, please check the file directory, and Python env path such as)"\project\Tools for networks\Window.ui"
+        root = os.path.dirname(os.path.realpath(__file__))
+        self.ui = uic.loadUi(os.path.join(root, 'Window.ui'), self)#If the script is not working, please check the file directory, and Python env path such as)"\project\Tools for networks\Window.ui"
         self.ui.show()
         self.fileName = 'Null'  #This is for "Files" in Memu bar, initial value.
         self.actionSave_session.triggered.connect(self._savefiledialog)   # 'Files' in Memubar 
@@ -231,13 +232,26 @@ class Form(QtWidgets.QMainWindow):
         self.textBrowser_2.setText("") # to initialize the text displayed on the "textBrowser_2"
         try :
             for i in reading_changed_text :    
-                  i = eval(i) # to Convert list 'string' to scapy format..if you do not use eval(), value "i" is simply string, not understable in scapy.
-                  i.build()   # for the checksum. The func build() is from SCAPY, which rebuilds the packet. So new Checksum calcuation occurs. 
-                  self.textBrowser_2.append(i.show(dump=True)) 
-                  self.new_modified_packets.append(i)  # The new built packets         
-                  if self.fileName != 'Null' : # This is to save output to a file once def _savefiledialog() enabled.
-                    self._file_write.write(i.show(dump=True))
-                    self._file_write.flush()  #This is to write system outputs in Buffer to a file.
+                i = eval(i) # to Convert list 'string' to scapy format..if you do not use eval(), value "i" is simply string, not understable in scapy.
+                  
+                temp = "" 
+                temp = i.summary()
+                if "IP" in temp:
+                    del i[IP].len
+                    del i[IP].chksum
+                
+                if "TCP" in temp:
+                    del i[TCP].chksum
+                
+                if "ICMP" in temp:
+                    del i[ICMP].chksum 
+
+               # i.build()   # for the checksum. The func build() is from SCAPY, which rebuilds the packet. So new Checksum calcuation occurs. 
+                self.textBrowser_2.append(i.show2(dump=True)) 
+                self.new_modified_packets.append(i)  # The new built packets         
+                if self.fileName != 'Null' : # This is to save output to a file once def _savefiledialog() enabled.
+                   self._file_write.write(i.show(dump=True))
+                   self._file_write.flush()  #This is to write system outputs in Buffer to a file.
         except:
             self.textBrowser_2.setText("Error occured running CheckSum error, you might add/put/modified wrong value type/name, please check what you touched")
             pass
