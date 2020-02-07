@@ -73,6 +73,8 @@ class Form(QtWidgets.QMainWindow):
         self.lineEdit_6.setText("1")#In TAB-1, "2). Time sleep (sec) Interleaving between commands (default 1sec)"
         self.dateTimeEdit # In TAB-1, "> Beginning"
         self.dateTimeEdit_2# In TAB-1, "> End"
+        self._thread_1 = None #Initialization to the un-defined thread value Used for 'Repetitive Tasks'
+        self._tl_1 = None     #Initialization to the un-defined Telnet object value Used for 'Repetitive Tasks'
 
      #Initialization for TAB-2
         self.lineEdit_7.setText("1") # In TAB-2, "3). The number of packets to send"
@@ -185,12 +187,16 @@ class Form(QtWidgets.QMainWindow):
     @QtCore.pyqtSlot() # This slot is for  "Stop or Ctrl+c" button in TAB-1
     def slot_4st(self): 
         try : 
-            self._thread_1.do_run = False # This helps to send a Flag to a running Thread.
-            self._thread_1.join()  # Waiting for Thread finishes here
-            self._tl_1.write(b"\x03")  # After thread stopped, to send "CTRL +C "
-            time.sleep(0.1)
-            temp1 = self._tl_1.read_very_eager()  #reading from a buffer received a response aganist "CTRL +C " from a Server.
-            self.textBrowser_2.append(temp1[10:].decode('ascii'))
+            if self._thread_1:  # When stop button clicked, this is to check thread is running or not.
+                self._thread_1.do_run = False # This helps to send a Flag to a running Thread.
+                self._thread_1.join()  # Waiting for Thread finishes here
+            if self._tl_1:      # When stop button clicked, this is to check telnet value has an object or not. (telnet is running or not)
+                self._tl_1.write(b"\x03")  # After thread stopped, to send "CTRL +C "
+                time.sleep(0.1)
+                temp1 = self._tl_1.read_eager()  #reading from a buffer received a response aganist "CTRL +C " from a Server.
+                self.textBrowser_2.append(temp1[10:].decode('ascii'))
+
+
         except:
             self.textBrowser_2.setText("Exception occurred. please report me s99225078@gmail.com") 
             pass
