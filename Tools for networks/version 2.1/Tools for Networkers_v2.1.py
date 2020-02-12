@@ -301,10 +301,10 @@ class Form(QtWidgets.QMainWindow):
     def slot_9st(self):        
         if self.p_list != None:
             for p in self.p_list: # This is to terminate/join all multi-processes
-                print(p.pid)
+              #  print(p.pid)
                 p.terminate()  
             for p in self.p_list: # This is to terminate/join all multi-processes
-                print(p.pid)
+              #  print(p.pid)
                 p.join()  
             self.p_list = [] # This is to inistialize the list
             

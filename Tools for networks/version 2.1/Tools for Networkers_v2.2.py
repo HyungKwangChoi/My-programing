@@ -19,6 +19,8 @@ import datetime
 import io
 from contextlib import redirect_stdout #This is to redirect stdout
 from multiprocessing import Process #This is for multi-processing
+#import multiprocessing
+#https://docs.python.org/2/library/multiprocessing.html#multiprocessing.Process.daemon
 import os
 
 import telnetlib         # This mainly used for TAB-1 such as telnet feature. 
@@ -35,7 +37,13 @@ from scapy.all import *  # This mainly used for TAB-2 such as packet building se
 
     
 
+
 def _sending_packets(cap_name,count,interval):    
+    #name = multiprocessing.current_process().name
+    #id = multiprocessing.current_process().pid
+    #print(name, id)
+    #print(os.getpid())
+
     if interval == 0:
         sendp(cap_name,loop=1)
     else :
@@ -52,6 +60,7 @@ def _sending_packets(cap_name,count,interval):
     #Scapy has a sendpfast function that sends packets using tcpreplay. However, this function first creates a temporary pcap file and then calls tcpreplay on that.
     #  This adds too much delay. Is there anyway to bypass it and directly send data to tcpreplay. 
     # I know that tcpreplay can read data from STDIN
+
 
 
 class Form(QtWidgets.QMainWindow):
@@ -81,6 +90,7 @@ class Form(QtWidgets.QMainWindow):
         self.lineEdit_7.setText("1") # In TAB-2, "3). The number of packets to send"
         self.lineEdit_8.setText("1") # In TAB-2, "4). PPS"
         self.current_datatime = QDateTime.currentDateTime()
+        self.p_list = [] # This is for multiprocess to take in the processes running as to list. Later This list used to process join()/terminate() 
              
 
     def _savefiledialog(self): # _savefiledialog at memu bar
@@ -277,13 +287,15 @@ class Form(QtWidgets.QMainWindow):
             pass
 
 
+
 #Used for 'Packet Builder'
     @QtCore.pyqtSlot() # This slot is for 'Running' in TAB-2
     def slot_8st(self): 
         try:
-            self.p_list = [] # This is for multiprocess to take in the processes running as to list. Later This list used to process join()/terminate()
-            p = Process(target=_sending_packets,args=(self.new_modified_packets, int(self.lineEdit_7.text()), int(self.lineEdit_8.text()))) # multiprocessing, and passing the arguments.
+          
+            p = Process(target=_sending_packets, name= "process name", args=(self.new_modified_packets, int(self.lineEdit_7.text()), int(self.lineEdit_8.text()))) # multiprocessing, and passing the arguments.
             p.start()  
+         #   print(p.pid)
             self.p_list.append(p)        
         except:
             self.textBrowser_2.setText("No packet to send. please check if you miss the sequence, such as 'running checksum or else' or not proper filename, else ")
@@ -293,10 +305,15 @@ class Form(QtWidgets.QMainWindow):
 #Used for 'Packet Builder'
     @QtCore.pyqtSlot() # This slot is for 'Stopping' in TAB-2
     def slot_9st(self):        
-        for p in self.p_list: # This is to terminate all multi-processes
-            p.terminate()   
-        for p in self.p_list: # This is to join() all multi-processes during termation.
-            p.join() 
+        if self.p_list != None:
+            for p in self.p_list: # This is to terminate/join all multi-processes
+              #  print(p.pid)
+                p.terminate()  
+            for p in self.p_list: # This is to terminate/join all multi-processes
+              #  print(p.pid)
+                p.join()  
+            self.p_list = [] # This is to inistialize the list
+            
 
 
 
