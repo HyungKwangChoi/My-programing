@@ -16,12 +16,16 @@
 
 
 
-## Building Environment.(Further details, please refer to the manual "release_note_v2.1")
+## Building Environment.(Further details, please refer to the manual "release_note_v2.1/v3.2")
 
  * Based on Juniper Router products.(MX/T/PTX series) Other vendor’s would not work properly.
  
- * Building environment : You have to have installed python 3.7.2, pyqt5, and scapy module (version 2.1)
+ * Building environment : You have to have installed python 3.7.2, pyqt5 and scapy module.
 
-## Running Capture
+## Version 2.1 Running Capture
+
+![Tools](https://user-images.githubusercontent.com/33049747/73349171-0b63af80-42ce-11ea-8d19-8bde3b85d571.png)
+
+## Version 3.2 Running Capture
 
 ![Tools](https://user-images.githubusercontent.com/33049747/73349171-0b63af80-42ce-11ea-8d19-8bde3b85d571.png)
