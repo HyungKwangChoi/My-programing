@@ -356,7 +356,7 @@ class Form(QtWidgets.QMainWindow):
     def _telnet_access(self,ip,id,pw):
 
         try :
-            self._tl = telnetlib.Telnet(ip, timeout=3) # Establish Telnet connection
+            self._tl = telnetlib.Telnet(ip, timeout=2) # Establish Telnet connection
             if b"login:" in self._tl.read_until(b"login:",timeout=3):   
                 self._tl.write(id.encode("ascii")+ b"\n")     # In TAB-1, writing "ID"
 
@@ -662,6 +662,7 @@ class Form(QtWidgets.QMainWindow):
     def slot_12st(self):   
 
         try:     
+            
             self._telnet_access(self.lineEdit_17.text(),self.lineEdit_18.text(),self.lineEdit_19.text())
             self._tl_2 = self._tl
 
@@ -702,8 +703,10 @@ class Form(QtWidgets.QMainWindow):
                     self.textBrowser_2.append("Commit failure...please check the Router configuration.")
                     break           # now we stop
 
-        except EOFError:            # If connection was closed
-                print('connection closed')
+        #except EOFError:            # If connection was closed
+        except :            # If connection was closed    
+                print('connection failure')
+                pass
 
 
 
