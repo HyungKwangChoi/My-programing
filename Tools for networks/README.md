@@ -23,13 +23,19 @@
  * Building environment : You have to have installed python 3.7.2, pyqt5 and scapy module.
 
 ## Version 2.1 Running Capture
-
+   * 'Packet Builder'
+   
 ![Tools](https://user-images.githubusercontent.com/33049747/73349171-0b63af80-42ce-11ea-8d19-8bde3b85d571.png)
 
 ## Version 3.2 Running Capture
+   * 'Easy Lab Replication'
 
 ![topo](https://user-images.githubusercontent.com/33049747/75033742-ea6a3500-54ee-11ea-8de4-4d806ee58488.png)
 
 ![topo2](https://user-images.githubusercontent.com/33049747/75033801-0bcb2100-54ef-11ea-89b8-d82b0d62f649.png)
 
+
+ * Total 30 x lab scenario in 'Easy Lab Replication' in details
+
+![feature in details](https://user-images.githubusercontent.com/33049747/75137146-2b01c280-572a-11ea-83aa-c9bab4732df9.png)
 
