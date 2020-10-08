@@ -40,7 +40,7 @@ import ctypes # This used for simple window messages popup box in TAB-2
 
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtGui import QTextCursor, QPixmap  #This is used for Qtextbrowzer scroll down feature. (self.textBrowser_2.moveCursor(QTextCursor.End)), QPixmap is for the image.
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QDateTime
+from PyQt5.QtCore import pyqtSlot, QDateTime
 
 
 
