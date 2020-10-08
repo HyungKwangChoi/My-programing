@@ -27,18 +27,14 @@ from pysnmp.error import PySnmpError
 
 LOGGER = logging.getLogger(__name__)
 
-HOSTNAME = '172.27.14.60'
+# put info which you are going to do SNMP quuery properly.
+HOSTNAME = '172.27.14.60'  
 HOSTNAME1 = 'demo.snmplabs.com'
 OIDS = '1.3.6.1.4.1.2636.3.1.13.1.8.9.1.0.0'
-#OIDS1 = 'sysDescr.0'
-
-#OIDS1 = '1.3.6.1.2.1.1.1.0'
 OIDS1 = 'sysDescr.0'
-
-
 comment_1 = 'first task'
 comment_2 = 'second task'
-SLEEP_TIME_1 = 1
+SLEEP_TIME_1 = 1 #time interval.
 SLEEP_TIME_2 = 1
 
 async def unconfigure(snmpEngine,authData=None): #if not set, it will throuw exception mesages "Task was destroyed but it is pending!", please refer to below for details.
@@ -54,6 +50,7 @@ async def async_next_snmp_request(snmpEngine,host, oids, sleep_time, comment,que
         while True:
             count += 1
             yield max(t + count * sleep_time - time.time(), 0)
+
     g = g_tick()
    
     def is_number(num): # This is to check if 'num' is number or str. If 'num' is number, i will return True
@@ -79,9 +76,9 @@ async def async_next_snmp_request(snmpEngine,host, oids, sleep_time, comment,que
                 ObjectType(ObjectIdentity(oids))
             )
         
-            #  print('middle start', time.time())
+          
             await asyncio.sleep(next(g))
-            #  print('middle end', time.time())
+       
             error_indication, error_status, error_index, var_binds = response
 
             if  error_indication or error_status or error_index :
@@ -100,7 +97,7 @@ async def async_next_snmp_request(snmpEngine,host, oids, sleep_time, comment,que
             
  
              
-def snmp_polling(queue):
+def snmp_polling(queue): #This is to query SNMP OID, and the data transferred to plot_drawing() using Queue() between multiproces.
     
         snmpEngine = SnmpEngine()
         loop = asyncio.get_event_loop()
@@ -114,8 +111,8 @@ def snmp_polling(queue):
        # alive.clear()
 
 
-def plot_drawing(queue):
-    print("did it start?")
+def plot_drawing(queue): #This is to draw 2 graph when receving date from snmp_polling(queue)  (1. plt.bar, 2. plt.plot)
+  
 
     plt.rcParams["figure.figsize"] = (10,4)
    # plt.rcParams['grid.linestyle'] = "--" 
@@ -128,24 +125,24 @@ def plot_drawing(queue):
     plt.grid( linestyle='--')
     #plt.savefig('savefig_default.png')
  
-    f = open('hi.csv','w', newline='') # this is to save a file as csv format.
+    f = open('Data_Collected.csv','w', newline='') # this is to save a file as csv format.
  
     i = 0
-    xx = []
-    yy = []
+    xx = [] # This is for plt.plot x-axis, because to draw plot, it needs data type LIST
+    yy = [] # This is for plt.plot Y-axis, because to draw plot, it needs data type LIST
     while True:
 
-        current_time = datetime.datetime.now() #current_time = datetime.datetime.now().replace(microsecond=0)
+        current_time = datetime.datetime.now() 
         delta_time = datetime.datetime.now() - datetime.timedelta(minutes=10)
      
   
         y = queue.get()
        
  
-        xx.append(current_time.replace(microsecond=0))
+        xx.append(current_time.replace(microsecond=0)) # 'microsecond=0' is to remove microsecond time of current_time format.
         yy.append(y)
 
-        plt.axis([delta_time.replace(microsecond=0), current_time.replace(microsecond=0),0,10]) 
+        plt.axis([delta_time.replace(microsecond=0), current_time.replace(microsecond=0),0,100]) 
         plt.bar(current_time.replace(microsecond=0),y, width=1./24/60/60, align='edge',color='g') # This is to address 1 sec interval width bar graph, "24 hours/60min/60sec with 1 sec interval"
       
        # print(xx[-2:])
@@ -153,8 +150,8 @@ def plot_drawing(queue):
         plt.plot(xx[-2:], yy[-2:], c='red')
         plt.pause(0.0000000001)
          
-        wr = csv.writer(f)
-        wr.writerow([i,current_time, y])
+        wr = csv.writer(f) # This is to save Data_collected from mib query.
+        wr.writerow([i,current_time, y]) # it saves  "number index, current time, SNMP value returned.""
         i = i+1
 
 
@@ -176,7 +173,7 @@ def plot_drawing(queue):
 
 if __name__ == '__main__':
 
-    queue = Queue()
+    queue = Queue() # Using Queue() of multiprocessing, data moved between multiprocess 'snmp_polling' and 'plot_drawing'
     p1 = Process(target=snmp_polling, args=(queue,)) 
     p1.start()
     
