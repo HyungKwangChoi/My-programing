@@ -4,11 +4,11 @@
 
  It's about small programs which helpful & convenient at a practical usage perspective, and license free.
 
- So i am on the step with small dreams hoping networkers to be happy.
+ So i am on the steps with small dreams hoping it would be helpful for networkers.
  
  And
  
- Hoping my challenge will not stop.
+ Hoping my challenges will not stop.
 
  If you want to add more meaningful features to this tool, send me email (s99225078@gmail.com).
  
@@ -16,16 +16,29 @@
 
 
 
-## Building Environment.(Further details, please refer to the manual "release_note_v2.1/v3.2")
+## Building Environment.
 
- * Based on Juniper Router products.(MX/T/PTX series) Other vendor’s would not work properly.
+ * Based on Juniper Router products.(MX/T/PTX series). Other vendor’s would not work properly.
  
- * Building environment : You have to have installed python 3.7.2, pyqt5 and scapy module.
+ * Building environment : 
+   1. Window10
+   2. Python 3.8.2
+   3. GUI tool : QT deisnger (pyqt5-tool)
+   3. Library used : telnetlib, scapy, pysnmp, pyqt5, pyqtgraph, matplotlib, pandas, numpy
+
+ * How to install : 
+   Please refer to the recent manual "release_note_v4.2"
+
+
+## Version 1.0 Running Capture
+   * 'Repetitive Tasks'
+
 
 ## Version 2.1 Running Capture
    * 'Packet Builder'
    
 ![Tools](https://user-images.githubusercontent.com/33049747/73349171-0b63af80-42ce-11ea-8d19-8bde3b85d571.png)
+
 
 ## Version 3.2 Running Capture
    * 'Easy Lab Replication'
@@ -39,3 +52,11 @@
 
 ![feature in details](https://user-images.githubusercontent.com/33049747/75137146-2b01c280-572a-11ea-83aa-c9bab4732df9.png)
 
+
+## Version 4.2 Running Capture
+   * 'MRTG' : 2 main features
+   1. 'Real-time plotting'
+
+
+   2. 'Restoring figures'
+   
