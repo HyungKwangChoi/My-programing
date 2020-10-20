@@ -18,16 +18,20 @@
 
 ## Building Environment.
 
- * Based on Juniper Router products.(MX/T/PTX series). Other vendor’s would not work properly.
+ ### Based on Juniper Router products.(MX/T/PTX series). Other vendor’s would not work properly.
 
- * Building environment
+ ### Building environment
 
    1. Window10
+
    2. Python 3.8.2
+
    3. GUI tool : QT deisnger (pyqt5-tool)
+
    4. Library used : telnetlib, scapy, pysnmp, pyqt5, pyqtgraph, matplotlib, pandas, numpy
 
- * How to install : 
+
+ ### How to install
    Please refer to the recent manual "release_note_v4.2"
 
 
