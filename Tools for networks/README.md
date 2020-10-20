@@ -24,7 +24,7 @@
    1. Window10
    2. Python 3.8.2
    3. GUI tool : QT deisnger (pyqt5-tool)
-   3. Library used : telnetlib, scapy, pysnmp, pyqt5, pyqtgraph, matplotlib, pandas, numpy
+   4. Library used : telnetlib, scapy, pysnmp, pyqt5, pyqtgraph, matplotlib, pandas, numpy
 
  * How to install : 
    Please refer to the recent manual "release_note_v4.2"
