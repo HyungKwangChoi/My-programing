@@ -32,7 +32,7 @@
 
 
  ### How to install
-   Please refer to the recent manual "release_note_v4.2"
+      Please refer to the recent manual "release_note_v4.2"
 
 
 ## Version 1.0 Running Capture
