@@ -34,7 +34,7 @@
  ### How to install
       Please refer to the recent manual "release_note_v4.2"
 
- ### How to run in YouTub.
+ ### How to run in YouTube.
       https://www.youtube.com/channel/UCTDcCNce6iNmQ0fczQZtFZA
 
 
