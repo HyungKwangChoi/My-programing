@@ -34,6 +34,9 @@
  ### How to install
       Please refer to the recent manual "release_note_v4.2"
 
+ ### How to run in YouTub.
+      https://www.youtube.com/channel/UCTDcCNce6iNmQ0fczQZtFZA
+
 
 ## Version 1.0 Running Capture
  * 'Repetitive Tasks'
