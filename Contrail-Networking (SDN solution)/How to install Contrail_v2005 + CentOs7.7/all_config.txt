@@ -1,0 +1,82 @@
+============ MX===============
+
+set system services ftp connection-limit 10
+deactivate system services ftp connection-limit
+set system services ssh root-login allow
+set system services telnet connection-limit 20
+set system services netconf ssh
+set system syslog archive size 10m
+set system syslog archive files 7
+set system syslog archive world-readable
+set system syslog user * any emergency
+set system syslog file messages any any
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system syslog file security authorization info
+set system syslog file security interactive-commands any
+set system processes routing failover other-routing-engine
+set system ntp server 172.27.122.253
+set chassis network-services enhanced-ip
+set interfaces ge-3/0/0 unit 0 family inet address 100.1.0.2/24
+set interfaces lo0 unit 0 family inet address 3.3.3.71/32
+set routing-options static route 3.3.3.72/32 next-hop 100.1.0.1
+set routing-options static route 100.0.0.0/24 next-hop 100.1.0.1
+========================EX2200=================================================
+
+set system host-name EX2200
+
+set system services ftp
+set system services ssh root-login allow
+set system services telnet
+set system services netconf ssh
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set interfaces ge-0/0/0 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/0 unit 0 family ethernet-switching vlan members CentOS_contrail
+set interfaces ge-0/0/1 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/1 unit 0 family ethernet-switching vlan members CentOS_contrail
+set interfaces ge-0/0/4 unit 0 family inet address 100.1.0.1/24
+set interfaces ge-0/0/12 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/12 unit 0 family ethernet-switching vlan members CentOS_contrail
+set interfaces ge-0/0/13 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/13 unit 0 family ethernet-switching vlan members CentOS_contrail
+set interfaces ge-0/0/23 unit 0 family ethernet-switching port-mode access
+set interfaces ge-0/0/23 unit 0 family ethernet-switching vlan members CentOS_contrail
+set interfaces ge-0/1/1 unit 0 family inet address 100.2.0.1/24
+set interfaces me0 unit 0 family inet address 172.27.122.240/24
+set interfaces vlan unit 100 family inet address 100.0.0.240/24
+set routing-options static route 172.27.0.0/16 next-hop 172.27.122.1
+set routing-options static route 10.0.0.0/8 next-hop 172.27.122.1
+set routing-options static route 3.3.3.71/32 next-hop 100.1.0.2
+set routing-options static route 3.3.3.72/32 next-hop 100.2.0.2
+set vlans CentOS_contrail vlan-id 100
+set vlans CentOS_contrail l3-interface vlan.100
+
+
+======================QFX config =====================================
+
+set system host-name QFX5100
+
+set system services ftp connection-limit 10
+deactivate system services ftp connection-limit
+set system services ssh root-login allow
+set system services telnet connection-limit 20
+set system services netconf ssh
+set system syslog archive size 10m
+set system syslog archive files 7
+set system syslog archive world-readable
+set system syslog user * any emergency
+set system syslog file messages any any
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system syslog file security authorization info
+set system syslog file security interactive-commands any
+set interfaces ge-0/0/0 unit 0 family inet address 100.2.0.2/24
+set interfaces em0 unit 0 family inet address 172.27.122.197/24
+set interfaces lo0 unit 0 family inet address 3.3.3.72/32
+set forwarding-options storm-control-profiles default all
+set routing-options static route 0.0.0.0/0 next-hop 172.27.122.1
+set routing-options static route 3.3.3.71/32 next-hop 100.2.0.1
+set routing-options static route 100.0.0.0/24 next-hop 100.2.0.1

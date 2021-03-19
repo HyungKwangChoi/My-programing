@@ -1,0 +1,123 @@
+[root@contrailcommand-221 ~]# cat command_servers.yml 
+---
+command_servers:
+    server1:
+        ip: 172.27.122.221  # IP address of server where you want to install Contrail Command
+        connection: ssh
+        ssh_user: root
+        ssh_pass: contrail123
+        sudo_pass: contrail123
+        ntpserver: 66.129.233.81
+ 
+        registry_insecure: false
+        container_registry: hub.juniper.net/contrail
+        container_tag: 2005.62
+        container_registry_username: JNPR-CustomerXX
+        container_registry_password: XXXXXXXXXXXXXXX
+        config_dir: /etc/contrail
+
+        contrail_config:
+            database:
+                type: postgres
+                dialect: postgres
+                password: contrail123
+            keystone:
+                assignment:
+                    data:
+                      users:
+                        admin:
+                          password: contrail123
+            insecure: true
+            client:
+              password: contrail123
+
+[root@contrailcommand-221 ~]# cat /root/instances.yml 
+global_configuration:
+  CONTAINER_REGISTRY: hub.juniper.net/contrail
+  REGISTRY_PRIVATE_INSECURE: false
+  CONTAINER_REGISTRY_USERNAME: JNPR-CustomerXXX
+  CONTAINER_REGISTRY_PASSWORD: XXXXXXXXXXXXXXXX
+provider_config:
+  bms:
+    ssh_user: root
+    ssh_pwd: contrail123
+    ntpserver: 66.129.233.81
+    domainsuffix: juniper.net
+instances:
+  controller-222.juniper.net:
+    ip: 172.27.122.222
+    ssh_user: root
+    ssh_pwd: contrail123
+    provider: bms
+    roles:
+      config:
+      config_database:
+      control:
+      webui:
+      analytics:
+      analytics_database:
+      analytics_alarm:
+      analytics_snmp:
+      openstack_control:
+      openstack_network:
+      openstack_storage:
+      openstack_monitoring:
+  compute2-225.juniper.net:
+    ip: 172.27.122.225
+    ssh_user: root
+    ssh_pwd: contrail123
+    provider: bms
+    roles:
+      vrouter:
+        VROUTER_GATEWAY: 100.0.0.240
+      openstack_compute:
+  compute1-224.juniper.net:
+    ip: 172.27.122.224
+    ssh_user: root
+    ssh_pwd: contrail123
+    provider: bms
+    roles:
+      vrouter:
+        VROUTER_GATEWAY: 100.0.0.240
+      openstack_compute:
+  CSN-223.juniper.net:
+    ip: 172.27.122.223
+    ssh_user: root
+    ssh_pwd: contrail123
+    provider: bms
+    roles:
+      vrouter:
+        TSN_EVPN_MODE: true
+        VROUTER_GATEWAY: 100.0.0.240
+contrail_configuration:
+  CONTRAIL_VERSION: "2005.62"
+  CLOUD_ORCHESTRATOR: openstack
+  RABBITMQ_NODE_PORT: 5673
+  VROUTER_GATEWAY: 100.0.0.240
+  ENCAP_PRIORITY: VXLAN,MPLSoGRE,MPLSoUDP
+  OPENSTACK_VERSION: queens
+  AUTH_MODE: keystone
+  KEYSTONE_AUTH_HOST: 172.27.122.222
+  KEYSTONE_AUTH_URL_VERSION: /v3
+  CONTROL_NODES: 100.0.0.222
+  TSN_NODES: 100.0.0.223
+  PHYSICAL_INTERFACE: enp5s0f1
+  CONTRAIL_CONTAINER_TAG: "2005.62"
+kolla_config:
+  kolla_globals:
+    enable_haproxy: no
+    enable_haproxy: no
+    enable_ironic: no
+    enable_swift: no
+    enable_barbican: no
+  kolla_passwords:
+    keystone_admin_password: contrail123
+  customize:
+    swift-proxy-server/proxy-server.conf: |
+      [filter:authtoken]
+      service_token_roles_required = True
+      service_token_roles = admin
+    nova.conf: |
+             [libvirt]
+             virt_type=qemu
+             cpu_mode=none

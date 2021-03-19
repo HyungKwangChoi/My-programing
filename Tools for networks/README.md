@@ -73,8 +73,12 @@
 ![real-time_graph](https://user-images.githubusercontent.com/33049747/96593000-fcbd9c80-1323-11eb-8cf5-cdf27add01a0.png)
 
    2. 'Restoring figures'
-   
+
+![MRTG_main_GUI](https://user-images.githubusercontent.com/33049747/97780355-7fb5e100-1bc7-11eb-807d-30caeb9971e8.png)
+  
 ![figure1](https://user-images.githubusercontent.com/33049747/96593047-08a95e80-1324-11eb-95ba-beb3e1f15e9b.png)
 
 
 ![figure2](https://user-images.githubusercontent.com/33049747/96593067-11019980-1324-11eb-8fb5-92446f330eb5.png)
+
+
