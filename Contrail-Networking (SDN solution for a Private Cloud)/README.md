@@ -11,6 +11,7 @@
  By studing Contrail-Networking, which is one of Juniper Networks SDN solution as Private Cloud, 
  we would get to know Cloud.
 
+ https://www.juniper.net/documentation/en_US/contrail19/topics/concept/understanding-contrail-networking-components.html
 ![contrail-networking](https://user-images.githubusercontent.com/33049747/111874212-79d66600-89d7-11eb-8f9f-36dec17b4e76.png)
 
  ### What i am going to post below as a series.
