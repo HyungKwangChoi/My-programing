@@ -1,8 +1,8 @@
 ## Intro
 
  Cloud is a big wave, being used here and there.
- But still many people doesn't know that in detail and feel to hard to understand
- I just want to share my knoweldge, let's start to catch up from the scratch with me with fun.
+ Someone may feel hard to catch it up.
+ So, let's start it from the scratch with me with fun.
  If you have any idea or comment, feel free to contact me (s99225078@gmail.com)
 
 
@@ -22,12 +22,12 @@
 
  ### 1. "How to install Contrail v2005 + CentOS7.7"
     
-   Lab Envrionment  
+   * Lab Envrionment  
    1. Contrail v2005 , CentOS7.7
    2. The number of servers : 5
       - 4 physical servers, 1 VM on ESXI server.
    3. Lab Device
-     - MX960, QFX5100     
+      - MX960, QFX5100     
 
 
  
