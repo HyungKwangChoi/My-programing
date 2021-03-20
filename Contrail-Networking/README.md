@@ -15,7 +15,7 @@
 ![contrail-networking](https://user-images.githubusercontent.com/33049747/111874212-79d66600-89d7-11eb-8f9f-36dec17b4e76.png)
 
  ### What i am going to post below as a series.
-   1. How to install Contrail v2005 + CentOS7.7
+   1. How to install Contrail-Networking v2005 + CentOS7.7
    2. Lab tests based on 5 scienario easy step by step.
    3. How to install RedHat Open Stack13 + contrail v2005
    4. Docker network.
