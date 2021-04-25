@@ -32,7 +32,11 @@
    3. Lab Device
       - MX960, QFX5100     
 
+ ### 2. "Lab tests based on 5 scienario easy step by step."
 
- 
-
-
+   * The number of Lab tests : 5
+   1. Lab test #1 : Creating 2 VMs and the same VNs (Virtual Network) 
+   2. Lab test #2 : Creating 2 VMs and different VNs (Virtual Network)
+   3. Lab test #3 : Central Routing for different VNs (Virtual Network) 
+   4. Lab test #4 : Ping to Internet and Ping between VMs (L3 Gateway) 
+   5. Lab test #5 : Ping to Internet (Spine & leaf) 
