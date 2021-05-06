@@ -41,7 +41,7 @@
    4. Lab test #4 : Ping to Internet and Ping between VMs (L3 Gateway) 
    5. Lab test #5 : Ping to Internet (Spine & leaf) 
 
- ### 3. "Find Contrail vRouter Nexthop"
+ ### 3. "Finding Contrail vRouter Nexthop"
 
    1. Basic concept of vRouter next-hop & command lists
    2. Finding vRouter NH in lab#1 : L2 switching (family bridge)
